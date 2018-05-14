@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'article {{ article.nom }}{% endblock %}
+
+{% block body %}
+    
+    <h1>{{ article.nom }}</h1>
+    <img src="{{ article.image }}">
+    <p>{{ article.description }}</p>        
+    <a href="#">Acheter l'article</a>
+    <a href="{{ path('article_delete', {'id': article.id}) }}">Supprimer</a>
+    
+{% endblock %}
