@@ -16,7 +16,7 @@ class ArticleType extends AbstractType
             ->add('prix')
             ->add('description')
             ->add('image')
-            ->add('poid')
+            ->add('poids')
             ->add('fraisDePort')
         ;
     }

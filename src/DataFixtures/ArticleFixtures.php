@@ -15,7 +15,7 @@ class ArticleFixtures extends Fixture
             $article->setNom("Article $i")
                     ->setDescription("Description de l'article $i")
                     ->setPrix(mt_rand(10, 200))
-                    ->setPoid(mt_rand(0, 20))
+                    ->setPoids(mt_rand(0, 20))
                     ->setImage("http://lorempicsum.com/futurama/350/200/1")
                     ->setFraisDePort(mt_rand(2, 25))
                     ->setDateCreation(new \DateTime());

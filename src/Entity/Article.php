@@ -29,7 +29,7 @@ class Article
     /**
      * @ORM\Column(type="float")
      */
-    private $poid;
+    private $poids;
 
     /**
      * @ORM\Column(type="text")
@@ -80,14 +80,14 @@ class Article
         return $this;
     }
 
-    public function getPoid(): ?float
+    public function getPoids(): ?float
     {
-        return $this->poid;
+        return $this->poids;
     }
 
-    public function setPoid(float $poid): self
+    public function setPoids(float $poids): self
     {
-        $this->poid = $poid;
+        $this->poids = $poids;
 
         return $this;
     }
