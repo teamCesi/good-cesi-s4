@@ -7,17 +7,29 @@ use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Utilisateur;
 use App\Entity\Article;
 
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 class AppFixtures extends Fixture
 {
+    private $encoder;
+    
+    public function __construct(UserPasswordEncoderInterface $encoder){
+        $this->encoder = $encoder;
+    }
+    
     public function load(ObjectManager $manager)
     {
         // 1. Créer les utilisateurs
         for($i = 1; $i <= 5; $i++){
             $user = new Utilisateur();
+            
+            // On demande à encoder un password
+            $password = $this->encoder->encodePassword($user, "password");
+            
             $user->setNom("Nom $i")
                  ->setPrenom("Prénom $i")
                  ->setEmail("email-$i@gmail.com")
-                 ->setPassword("password")
+                 ->setPassword($password)
                  ->setAdresse("Adresse $i")
                  ->setUsername("Username $i")
                  ->setIsAdmin(false);
@@ -40,10 +52,13 @@ class AppFixtures extends Fixture
         }
         
         $admin = new Utilisateur();
+        
+        $password = $this->encoder->encodePassword($admin, "admin");
+        
         $admin->setNom("Chamla")
               ->setPrenom("Lior")
               ->setEmail("lchamla@gmail.com")
-              ->setPassword("admin")
+              ->setPassword($password)
               ->setUsername("admin")
               ->setAdresse("Adresse à la con")
               ->setIsAdmin(true);
