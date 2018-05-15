@@ -5,6 +5,9 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Persistence\ObjectManager;
+
+use Symfony\Component\HttpFoundation\Request;
+
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Form\ArticleType;
@@ -34,21 +37,58 @@ class ArticleController extends Controller
     /**
      * @Route("/article/new", name="article_new")
      */
-    public function createAction() {
+    public function createAction(Request $request, ObjectManager $manager) {
         // 1. Créer un article
         $article = new Article();
         
-        $article->setNom("Bonjour")
-                ->setPrix(200)
-                ->setDescription("Kikoo les amis !");
+        // $article->setNom("Bonjour")
+        //         ->setPrix(200)
+        //         ->setDescription("Kikoo les amis !");
         
         // 2. J'ai besoin du formulaire ArticleType
         $form = $this->createForm(ArticleType::class, $article);
+        
+        // 3. On doit analyser la requete HTTP
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()) {
+            // 4. Intégrer l'article à la base avec le manager
+            $article->setDateCreation(new \DateTime());
+            
+            $manager->persist($article);
+            $manager->flush();
+            
+            return $this->redirectToRoute('article_list');
+        }
         
         $formView = $form->createView();
         // Affichage du formulaire
         return $this->render('article/create.html.twig', [
            'form' => $formView
+        ]);
+    }
+    
+    /**
+     * @Route("/article/{id}/edit", name="article_edit")
+     */
+    public function editAction(Article $article, ObjectManager $manager, Request $request) {
+        
+        $form = $this->createForm(ArticleType::class, $article);
+        
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($article);
+            $manager->flush();
+            return $this->redirectToRoute('article_show', [
+                'id' => $article->getId()
+            ]);
+        }
+        
+        $formView = $form->createView();
+        
+        return $this->render('article/edit.html.twig', [
+            'form' => $formView
         ]);
     }
     
