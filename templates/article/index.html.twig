@@ -9,6 +9,11 @@
     {% for article in articles %}
     
         <h2>{{ article.nom }}</h2>
+        
+        <p>
+            Vendu par <strong>{{ article.utilisateur.prenom }} {{ article.utilisateur.nom }}</strong>
+        </p>
+        
         <img src="{{ article.image }}">
         <p>{{ article.description }}</p>        
         <a href="{{ path('article_show', {'id': article.id}) }}">Voir l'article</a>

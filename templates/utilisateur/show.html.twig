@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'utilisateur{% endblock %}
+
+{% block body %}
+    
+    <h1>Fiche de {{ utilisateur.prenom | upper }} {{ utilisateur.nom }}</h1>
+    <hr>
+    <h2>Voici les {{ utilisateur.articles | length }} articles</h2>
+    
+    {% for article in utilisateur.articles %}
+        <h3>{{ article.nom }}</h3>
+        <img src="{{ article.image }}">
+        <strong>{{ article.prix }} €</strong>
+        <p>Créé le {{ article.dateCreation | date('d/m/Y') }}</p>
+    {% endfor %}
+    
+{% endblock %}

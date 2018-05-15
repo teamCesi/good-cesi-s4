@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Entity\Utilisateur;
 
 class UtilisateurController extends Controller
 {
@@ -16,4 +17,15 @@ class UtilisateurController extends Controller
             'controller_name' => 'UtilisateurController',
         ]);
     }
+    
+    /**
+     * @Route("/utilisateurs/{id}", name="utilisateur_show")
+     */
+    public function showAction(Utilisateur $user) {
+        
+        return $this->render('utilisateur/show.html.twig', [
+            'utilisateur' => $user
+        ]);
+    }
+    
 }
