@@ -12,6 +12,8 @@ use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Form\ArticleType;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 class ArticleController extends Controller
 {
     /**
@@ -36,6 +38,7 @@ class ArticleController extends Controller
     
     /**
      * @Route("/article/new", name="article_new")
+     * @IsGranted("ROLE_USER")
      */
     public function createAction(Request $request, ObjectManager $manager) {
         // 1. Créer un article
@@ -54,6 +57,9 @@ class ArticleController extends Controller
         if($form->isSubmitted() && $form->isValid()) {
             // 4. Intégrer l'article à la base avec le manager
             $article->setDateCreation(new \DateTime());
+            
+            $user = $this->getUser();
+            $article->setUtilisateur($user);
             
             $manager->persist($article);
             $manager->flush();
