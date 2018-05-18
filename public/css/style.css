@@ -1,0 +1,15 @@
+/* Css theme*/
+
+
+ul li{
+  display: inline;
+  list-style-type: none;
+}
+
+div.line-title{
+background: black;
+height: 1px;
+width: 100px;
+margin: auto;
+display: block;
+}
