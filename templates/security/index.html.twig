@@ -3,22 +3,18 @@
 {% block title %}Hello {{ controller_name }}!{% endblock %}
 
 {% block body %}
-    
+
+<div class="container form login">
     <h1>Connexion</h1>
-    
+    <div class="line-title"></div>
     <form method="post">
         <input type="text" name="_username" placeholder="Username" />
-        
-        <br><br>
-        
         <input type="password" name="_password" placeholder="Password" />
-        
-        <br><br>
-        
-        <button type="submit">Connexion !</button>
+        <button type="submit"class="btn btn-success mt-2">Connexion !</button>
     </form>
-    
-    
-    
-    
+  </div>
+
+
+
+
 {% endblock %}

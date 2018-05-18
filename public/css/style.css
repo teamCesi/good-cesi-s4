@@ -1,15 +1,40 @@
 /* Css theme*/
 
-
+/* header*/
 ul li{
   display: inline;
   list-style-type: none;
 }
 
+
+/* Titre*/
 div.line-title{
 background: black;
 height: 1px;
 width: 100px;
 margin: auto;
 display: block;
+}
+
+/* Font-size*/
+.list-group .btn-info{
+  font-size: 12px;
+}
+
+/* formulaire surcouche css*/
+.form input,.form textarea{
+  display: block;
+width: 100%;
+padding: .375rem .75rem;
+font-size: 1rem;
+line-height: 1.5;
+color: #495057;
+background-color: #fff;
+background-clip: padding-box;
+border: 1px solid #ced4da;
+border-radius: .25rem;
+transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.form.login input{
+  margin: 25px 0px;
 }

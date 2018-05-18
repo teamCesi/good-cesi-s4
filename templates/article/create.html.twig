@@ -3,15 +3,13 @@
 {% block title %}Créer un article{% endblock %}
 
 {% block body %}
-    
+
+    <div class="container form">
     <h1>Créer un article</h1>
-    
+    <div class="line-title"></div>
     {{ form_start(form) }}
-    
     {{ form_widget(form) }}
-    
-    <button type="submit">Créer l'article !</button>
-    
+    <button type="submit" class="btn btn-success mt-4">Créer l'article !</button>
     {{ form_end(form) }}
-    
+    </div>
 {% endblock %}

@@ -4,14 +4,19 @@
 
 {% block body %}
 
-    <h1>Liste des utilisateurs</h1>
-
-    <a href="{{ path('utilisateur_new') }}">Créer un utilisateur</a>
+  <div class="container">
+    <h1 class="text-center">Liste des utilisateurs</h1>
+    <div class="line-title"></div>
+    <a href="{{ path('utilisateur_new') }}" class="btn btn-success mb-2 mt-2">Créer un utilisateur</a>
+    <ul class="list-group">
     {% for utilisateur in utilisateurs %}
-        <h2>{{ utilisateur.nom }} {{ utilisateur.prenom }}</h2>
-        <p>{{ utilisateur.email }}</p>
-        <p>{{ utilisateur.adresse }}</p>
-        <a href="{{ path('utilisateur_show', {'id': utilisateur.id} ) }} ">Afficher infos utilisateur</a>
+    <li class="list-group-item">
+      <h2>{{ utilisateur.nom }}</h2>
+      <p>{{ utilisateur.email }}</p>
+      <p>{{ utilisateur.adresse }}</p>
+      <a href="{{ path('utilisateur_show', {'id': utilisateur.id} ) }} "class="btn btn-info">Afficher infos utilisateur</a>
+    </li>
     {% endfor %}
-
+    </ul>
+  </div>
 {% endblock %}

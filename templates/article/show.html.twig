@@ -4,15 +4,23 @@
 
 {% block body %}
 
-    <h1>{{ article.nom }}</h1>
-    <img src="{{ article.image }}">
-    <p>{{ article.description }}</p>
-    <p>Prix : {{ article.prix }} €</p>
-    <p>Frais de port : {{ article.fraisDePort }} €</p>
-    <p>Poids : {{ article.poids }} kg</p>
-    <p>Date de cration : {{ article.dateCreation | date('d/m/Y') }}</p>
-    <p>Contacter le vendeur : {{ article.utilisateur.nom | upper }} {{ article.utilisateur.email }}</p>
-    <a href="#">Acheter l'article</a>
-    <!--<a href="{# path('article_delete', {'id': article.id}) #}">Supprimer</a>-->
+<div class="container mt-5 mb-5">
+  <div class="card" style="width: 18rem;" class="mt-5 mb-5">
+    <img class="card-img-top" src="{{ article.image }}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ article.nom }}</h5>
+      <p class="card-text">{{ article.description }}</p>
+      <p class="badge badge-success">Prix : {{ article.prix }} €</p><br>
+      <p class="badge badge-secondary">Frais de port : {{ article.fraisDePort }} €</p><br>
+      <p class="badge badge-secondary">Poids : {{ article.poids }} kg</p><br>
+      <p class="badge badge-warning">Date de cration : {{ article.dateCreation | date('d/m/Y') }}</p>
+      <p>Contacter le vendeur : {{ article.utilisateur.nom | upper }} {{ article.utilisateur.email }}</p>
+      <a href="#" class="btn btn-primary">Acheter l'article</a>
+      <!--<a href="{# path('article_delete', {'id': article.id}) #}">Supprimer</a>-->
+    </div>
+  </div>
+</div>
+
+
 
 {% endblock %}
