@@ -59,9 +59,15 @@ class Utilisateur implements UserInterface, \Serializable
      */
     private $articles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="utilisateur")
+     */
+    private $commandes;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
     }
 
     public function getId()
@@ -226,5 +232,36 @@ class Utilisateur implements UserInterface, \Serializable
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commandes->contains($commande)) {
+            $this->commandes->removeElement($commande);
+            // set the owning side to null (unless already changed)
+            if ($commande->getUtilisateur() === $this) {
+                $commande->setUtilisateur(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,6 +58,21 @@ class Article
      * @ORM\JoinColumn(nullable=false)
      */
     private $utilisateur;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Commande", mappedBy="article", cascade={"persist", "remove"})
+     */
+    private $commande;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Categorie", mappedBy="article")
+     */
+    private $categories;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -154,6 +171,51 @@ class Article
     public function setUtilisateur(?Utilisateur $utilisateur): self
     {
         $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(Commande $commande): self
+    {
+        $this->commande = $commande;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $commande->getArticle()) {
+            $commande->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Categorie[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Categorie $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categorie $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+            $category->removeArticle($this);
+        }
 
         return $this;
     }
