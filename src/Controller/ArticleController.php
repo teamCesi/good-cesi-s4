@@ -17,7 +17,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/categorie", name="article_list")
+     * @Route("/article", name="article_list")
      */
     public function indexAction(ArticleRepository $repo)
     {

@@ -1,22 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Articles{% endblock %}
 
 {% block body %}
 
     <h1 class="text-center">Liste des articles</h1>
     <div class="line-title mb-5"></div>
 
-
-    {% for article in articles %}
-
     <div class="container">
       <ul class="list-group">
-        {% set myVal = 0 %}
-        {% for article in articles|sort|reverse %}
-          {% if myVal == 3  %}
-            {% set break = true %}
-          {% else %}
+        {% for article in articles %}
           <li class="list-group-item">
             <h2>{{ article.nom }}</h2>
             <span class="badge badge-warning">Créé le {{ article.dateCreation | date('d/m/Y') }}</span><br>
@@ -25,18 +18,8 @@
             <p>{{ article.description }}</p>
             <a href="{{ path('article_show', {'id': article.id}) }}"class="btn btn-primary">Voir l'article</a>
           </li>
-          {% set myVal = myVal + 1 %}
-          {% endif %}
         {% endfor %}
       </ul>
     </div>
-
-    {% endfor %}
-
-
-
-
-
-
 
 {% endblock %}
