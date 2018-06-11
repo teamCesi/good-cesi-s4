@@ -76,6 +76,7 @@ class ArticleController extends Controller
 
     /**
      * @Route("/article/{id}/edit", name="article_edit")
+     * @IsGranted("ROLE_USER")
      */
     public function editAction(Article $article, ObjectManager $manager, Request $request) {
 
@@ -115,6 +116,7 @@ class ArticleController extends Controller
 
     /**
      * @Route("/article/{id}/delete", name="article_delete")
+     * @IsGranted("ROLE_USER")
      */
     public function deleteAction(Article $article, ObjectManager $manager) {
         // 1. J'ai besoin du manager
