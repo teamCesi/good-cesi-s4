@@ -1,5 +1,9 @@
 /* Css theme*/
 
+.center {
+  text-align: center;
+}
+
 /* header*/
 ul li{
   display: inline;
@@ -44,4 +48,35 @@ transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 a.view-article {
   display: block;
   margin: 10px 0;
+}
+
+/* Formualire */
+div.content-form {
+  display: flex;
+  justify-content: center;
+}
+
+form.formulaire {
+  width: 30%;
+}
+
+div.content-form label {
+  display: block;
+}
+
+div.content-form input, div.content-form textarea {
+  border-radius: 3px;
+  border: 1px solid #BDBDBD;
+  width: 100%;
+}
+
+div.content-form input:hover, div.content-form textarea:hover {
+  border-radius: 3px;
+  border: 1px solid #2196F3;
+  width: 100%;
+}
+
+div.content-form button {
+  margin-top: 10px;
+  float: right;
 }
