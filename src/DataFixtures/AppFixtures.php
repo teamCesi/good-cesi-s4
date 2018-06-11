@@ -22,26 +22,26 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         // 1. Créer les utilisateurs
-       //  for($i = 1; $i <= 5; $i++){
+         for($i = 1; $i <= 5; $i++){
             $user = new Utilisateur();
             
             // On demande à encoder un password
             $password = $this->encoder->encodePassword($user, "password");
             
-            $user->setNom("Nom ")
-                 ->setPrenom("Prénom ")
-                 ->setEmail("email@gmail.com")
+            $user->setNom("Nom $i")
+                 ->setPrenom("Prénom $i")
+                 ->setEmail("email-$i@gmail.com")
                  ->setPassword($password)
-                 ->setAdresse("Adresse ")
-                 ->setUsername("Username ")
+                 ->setAdresse("Adresse $i")
+                 ->setUsername("Username $i")
                  ->setIsAdmin(false);
 
                  $manager->persist($user);
                  
            // for($j = 0; $j < mt_rand(0, 5); $j++) {
                 $article = new Article();
-                $article->setNom("Article ")
-                        ->setDescription("Description de l'article ")
+                $article->setNom("Article $i")
+                        ->setDescription("Description de l'article $i")
                         ->setPrix(mt_rand(10, 200))
                         ->setPoids(mt_rand(0, 20))
                         ->setImage("http://lorempicsum.com/futurama/350/200/1")
@@ -61,27 +61,28 @@ class AppFixtures extends Fixture
              //   }
 
                     $categorie = new Categorie();
-                    $categorie->setNom("osef")
+                    $categorie->setNom("catergorie $i")
                                 ->addArticle($article);
                     $manager->persist($categorie);
                                 
            
       //  }
-        
+    }
         $admin = new Utilisateur();
         
         $password = $this->encoder->encodePassword($admin, "admin");
         
-        $admin->setNom("Chamla")
-              ->setPrenom("Lior")
-              ->setEmail("lchamla@gmail.com")
+        $admin->setNom("Admin")
+              ->setPrenom("Admin")
+              ->setEmail("admin@gmail.com")
               ->setPassword($password)
               ->setUsername("admin")
-              ->setAdresse("Adresse à la con")
+              ->setAdresse("adresse")
               ->setIsAdmin(true);
               
         $manager->persist($admin);
 
         $manager->flush();
+             
     }
 }
