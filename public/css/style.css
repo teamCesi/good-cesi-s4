@@ -38,3 +38,10 @@ transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 .form.login input{
   margin: 25px 0px;
 }
+
+/* Page article */
+
+a.view-article {
+  display: block;
+  margin: 10px 0;
+}
