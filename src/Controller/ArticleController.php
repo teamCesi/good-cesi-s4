@@ -63,7 +63,8 @@ class ArticleController extends Controller
             $article->setDateCreation(new \DateTime());
 
             $user = $this->getUser();
-            $article->setUtilisateur($user);
+            $article->setUtilisateur($user)
+                    ->SetIsVendu(false);
 
             $manager->persist($article);
             $manager->flush();
