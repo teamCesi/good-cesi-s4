@@ -6,6 +6,8 @@
         {% block stylesheets %}
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/font.css') }}" rel="stylesheet">
+
         {% endblock %}
     </head>
     <body>
@@ -21,10 +23,13 @@
             <a class="nav-item nav-link" href="/utilisateur">utilisateurs</a>
           </div>
         </div>
-        <div id="connexion"></div>
-          <a href="{{ path('login') }}" class="nav-item nav-link">Connexion</a>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+          <a href="#" class="nav-item nav-link">Mon compte</a>
           <a href="{{ path('logout') }}" class="nav-item nav-link">Déconnexion</a>
-        </div>
+        {% else %}
+        <a href="{{ path('login') }}" class="nav-item nav-link">Connexion</a>
+        <a href="utilisateur/new" class="nav-item nav-link">Inscription</a>
+        {% endif %}
       </nav>
 
       {% block body %}{% endblock %}
