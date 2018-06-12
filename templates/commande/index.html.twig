@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commandes{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center">Liste des commandes</h1>
+<div class="line-title mb-5"></div>
+
+<div class="container">
+        <ul class="list-group">
+            {% for commande in commandes %}
+                <li class="list-group-item">
+                    <p>Numéro de commande : <strong>{{ commande.id }}</strong></p>
+                    <p>Acheté par <strong>{{ commande.utilisateur.prenom }} {{ commande.utilisateur.nom }}</strong></p>
+                    <p>Nom de l'article : <strong>{{ commande.article.nom }}</strong></p>
+                    <p>Date d'expédition : {{ commande.dateExp | date('d/m/Y') }}</p>
+                    {% if commande.isEnvoyer == true %}
+                        <p class="vendu alert alert-info">Expédié</p>
+                     {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+</div>
+
+
+
+{% endblock %}
