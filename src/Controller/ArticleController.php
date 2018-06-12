@@ -135,10 +135,10 @@ class ArticleController extends Controller
         return $this->redirectToRoute('article_list');
     }
 
-        /**
+    /**
      * @Route("/article/{id}/acheter", name="article_acheter")
      * @IsGranted("ROLE_USER")
-     */
+    */
 
     public function acheterAction(Utilisateur $utilisateur, Article $article, ObjectManager $manager, Request $request) {
         

@@ -55,8 +55,10 @@ class AppFixtures extends Fixture
 
              //   for($k = 0; $k < mt_rand(0,5); $k++ ){
                     $commande = new Commande();
+                    // if GetIsVendu === true alors tu fais les 2 lignes dessous
                     $commande->setUtilisateur($user)
-                            ->setArticle($article);
+                            ->setArticle($article)
+                            ->setIsEnvoyer(false);
   
                     $manager->persist($commande);
              //   }
