@@ -80,3 +80,8 @@ div.content-form button {
   margin-top: 10px;
   float: right;
 }
+
+input#cb {
+  margin: 20px 0;
+  height: 40px;
+}
