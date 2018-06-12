@@ -16,6 +16,9 @@
             <p>Vendu par <strong>{{ article.utilisateur.prenom }} {{ article.utilisateur.nom }}</strong></p>
             <img src="{{ article.image }}">
             <p>{{ article.description }}</p>
+            {% if article.isVendu == true %}
+              <p class="vendu alert alert-danger">Vendu</p>
+            {% endif %}
             <a href="{{ path('article_show', {'id': article.id}) }}"class="btn btn-primary">Voir l'article</a>
           </li>
         {% endfor %}

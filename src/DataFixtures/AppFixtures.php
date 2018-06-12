@@ -47,6 +47,7 @@ class AppFixtures extends Fixture
                         ->setImage("http://lorempicsum.com/futurama/350/200/1")
                         ->setFraisDePort(mt_rand(2, 25))
                         ->setDateCreation(new \DateTime())
+                        ->setIsVendu(false)
                         ->setUtilisateur($user);
                 
                     $manager->persist($article);

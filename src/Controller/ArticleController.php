@@ -160,9 +160,9 @@ class ArticleController extends Controller
                 $manager->persist($utilisateur);
                 
                 // 3. Supprimer l'article acheté
-                $manager->remove($article);
+                //$manager->remove($article);
                 // 3. Modifier le bolean isVendu à true
-                //$article->SetIsVendu(true);
+                $article->SetIsVendu(true);
 
                 // envoie dans la base : adresse utilisateur + delete article
                 $manager->flush();

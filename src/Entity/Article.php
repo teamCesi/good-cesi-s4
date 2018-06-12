@@ -54,6 +54,11 @@ class Article
     private $image;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVendu;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -216,6 +221,18 @@ class Article
             $this->categories->removeElement($category);
             $category->removeArticle($this);
         }
+
+        return $this;
+    }
+
+    public function getIsVendu(): ?bool
+    {
+        return $this->isVendu;
+    }
+
+    public function setIsVendu(bool $isVendu): self
+    {
+        $this->isVendu = $isVendu;
 
         return $this;
     }
