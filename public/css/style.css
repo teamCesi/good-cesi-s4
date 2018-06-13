@@ -80,3 +80,22 @@ div.content-form button {
   margin-top: 10px;
   float: right;
 }
+
+input#cb {
+    margin: 5px 0;
+    height: 40px;
+}
+
+p.vendu {
+  width: 15%;
+  text-align: center;
+}
+
+a.create {
+  margin-bottom: 10px;
+}
+
+button.expedie {
+  display: block;
+  margin: 10px 0;
+}

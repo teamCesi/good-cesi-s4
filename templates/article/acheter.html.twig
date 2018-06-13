@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %} {% block title %}Acheter l'article{% endblock %} {% block body %}
+
+<h1 class="center">Acheter l'article</h1>
+
+<div class="content-form">
+
+    {{ form_start(form, {attr: {class: 'formulaire'} }) }} {{ form_widget(form) }}
+    <label for="cb" class="required">Numéro de votre carte bancaire</label>
+    <input id="cb" type="text" name="cb" required>
+
+    {% for message in app.flashes('chiffres') %}
+        <div class="flash-chiffres alert alert-danger center">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Envoyer !</button>
+
+    {{ form_end(form) }}
+
+
+</div>
+
+{% endblock %}

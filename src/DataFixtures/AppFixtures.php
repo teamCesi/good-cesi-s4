@@ -47,6 +47,7 @@ class AppFixtures extends Fixture
                         ->setImage("http://lorempicsum.com/futurama/350/200/1")
                         ->setFraisDePort(mt_rand(2, 25))
                         ->setDateCreation(new \DateTime())
+                        ->setIsVendu(false)
                         ->setUtilisateur($user);
                 
                     $manager->persist($article);
@@ -54,8 +55,10 @@ class AppFixtures extends Fixture
 
              //   for($k = 0; $k < mt_rand(0,5); $k++ ){
                     $commande = new Commande();
+                    // if GetIsVendu === true alors tu fais les 2 lignes dessous
                     $commande->setUtilisateur($user)
-                            ->setArticle($article);
+                            ->setArticle($article)
+                            ->setIsEnvoyer(false);
   
                     $manager->persist($commande);
              //   }

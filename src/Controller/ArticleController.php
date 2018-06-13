@@ -9,6 +9,14 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Form\ArticleType;
+<<<<<<< HEAD
+=======
+
+use App\Form\AcheterType;
+use App\Entity\Utilisateur;
+use App\Repository\UtilisateurRepository;
+
+>>>>>>> 6544a09af2237e892c1dc5097a4395526fa25ca5
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class ArticleController extends Controller
@@ -56,6 +64,7 @@ class ArticleController extends Controller
             // 4. Intégrer l'article à la base avec le manager
             $article->setDateCreation(new \DateTime());
             $user = $this->getUser();
+<<<<<<< HEAD
             $article->setUtilisateur($user);
             // 5. On fait un foreach pour la relation avec la table article_categorie
             foreach($article->getCategories() as $category){
@@ -63,6 +72,10 @@ class ArticleController extends Controller
             	$category->addArticle($article);
             	$manager->persist($category);   
             }
+=======
+            $article->setUtilisateur($user)
+                    ->SetIsVendu(false);
+>>>>>>> 6544a09af2237e892c1dc5097a4395526fa25ca5
 
             $manager->persist($article);
             $manager->flush();
@@ -132,5 +145,59 @@ class ArticleController extends Controller
         return $this->redirectToRoute('article_list');
     }
 
+    /**
+     * @Route("/article/{id}/acheter", name="article_acheter")
+     * @IsGranted("ROLE_USER")
+    */
 
+    public function acheterAction(Article $article, ObjectManager $manager, Request $request) {
+
+        // récupère l'utilisateur
+        $utilisateur = $this->getUser();
+        
+        // 1. Modif adresse client en bas
+
+        $form = $this->createForm(AcheterType::class, $utilisateur);
+
+        $form->handleRequest($request);
+
+        // 2. test champ 10 chiffres && 
+        if($form->isSubmitted() && $form->isValid()){
+      
+            $cb = $_POST['cb'];
+
+            // calcul la longueur
+            $longeur = strlen($cb);
+            // s'il n'est pas vide / si c'est un nombre entier / possède 10 chiffres
+            if(!empty($cb) && ctype_digit($cb) && $longeur == 10) {
+                // récupère adresse utilisateur
+                $manager->persist($utilisateur);
+                
+                // 3. Supprimer l'article acheté
+                //$manager->remove($article);
+                // 3. Modifier le bolean isVendu à true
+                $article->setIsVendu(true);
+
+                // envoie dans la base : adresse utilisateur + delete article
+                $manager->flush();
+
+                // redirige vers la vue article_list
+                return $this->redirectToRoute('article_list');
+
+            } else {
+                // message flash
+                $this->addFlash(
+                    'chiffres',
+                    'Veuillez indiquez 10 chiffres'
+                );
+            }
+      
+        }
+
+        $formView = $form->createView();
+        
+        return $this->render('article/acheter.html.twig', [
+            'form' => $formView
+        ]);
+    }
 }
