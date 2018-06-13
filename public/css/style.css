@@ -100,6 +100,10 @@ button.expedie {
   margin: 10px 0;
 }
 
-a.commande {
+.commande {
   width: 30%;
+}
+
+.width-center {
+  margin: 0 auto;
 }
