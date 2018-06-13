@@ -31,10 +31,14 @@ class CommandeController extends Controller
      * @Route("/commande/{id}/expedier", name="commande_expedier")
      */
     public function expedierAction(Request $request, Commande $commande, ObjectManager $manager) {
+        // regarde la request : récupère la valeur du button radio expedie
         $statut = $request->request->get("expedie");
+        // si statut a la valeur expedie 
         if($statut == "expedie") {
+            // alors on passe le statut à true pour envoyer en bdd
             $statut = true;
         } else {
+            // sinon on passe le statut à false
             $statut = false;
         }
 
