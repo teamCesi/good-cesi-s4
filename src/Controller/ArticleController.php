@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Article;
+use App\Entity\Commande;
 use App\Form\ArticleType;
 use App\Form\AcheterType;
 use App\Entity\Utilisateur;
@@ -151,7 +152,7 @@ class ArticleController extends Controller
         
         // 1. Modif adresse client en bas
 
-        $form = $this->createForm(AcheterType::class, $utilisateur);
+        $form = $this->createForm(AcheterType::class);
 
         $form->handleRequest($request);
 
@@ -165,12 +166,19 @@ class ArticleController extends Controller
             // s'il n'est pas vide / si c'est un nombre entier / possède 10 chiffres
             if(!empty($cb) && ctype_digit($cb) && $longeur == 10) {
                 // récupère adresse utilisateur
-                $manager->persist($utilisateur);
+                $commande = new Commande();
+                $commande->setUtilisateur($utilisateur)
+                         ->setArticle($article)
+                         ->setIsEnvoyer(false);
+                         
+                //$manager->persist($utilisateur);
+                $manager->persist($commande);
                 
                 // 3. Supprimer l'article acheté
                 //$manager->remove($article);
                 // 3. Modifier le bolean isVendu à true
                 $article->setIsVendu(true);
+                $manager->persist($article);
 
                 // envoie dans la base : adresse utilisateur + delete article
                 $manager->flush();

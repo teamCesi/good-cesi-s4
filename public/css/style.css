@@ -99,3 +99,7 @@ button.expedie {
   display: block;
   margin: 10px 0;
 }
+
+a.commande {
+  width: 30%;
+}
