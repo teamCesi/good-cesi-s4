@@ -3,11 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Article;
-use App\Entity\Utilisateur;
+use App\Entity\Categorie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
+
 
 
 class ArticleType extends AbstractType
@@ -21,14 +23,12 @@ class ArticleType extends AbstractType
             ->add('image')
             ->add('poids')
             ->add('fraisDePort')
-            // ->add('utilisateur', EntityType::class, [
-            //     'class' => Utilisateur::class,
-            //     // 'choice_label' => 'nom'
-            //     'choice_label' => function($utilisateur) {
-            //         return $utilisateur->getPrenom() . ' ' . $utilisateur->getNom();
-            //     }
-            // ])
-        ;
+            ->add('categories', EntityType::class, array(
+                'class' => Categorie::class,
+                'multiple' => true,
+                'expanded' => true,
+                'choice_label' => 'nom')); 
+            
     }
 
     public function configureOptions(OptionsResolver $resolver)

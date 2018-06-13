@@ -5,13 +5,10 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Persistence\ObjectManager;
-
 use Symfony\Component\HttpFoundation\Request;
-
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Form\ArticleType;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class ArticleController extends Controller
@@ -55,11 +52,17 @@ class ArticleController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+        	dump($article);
             // 4. Intégrer l'article à la base avec le manager
             $article->setDateCreation(new \DateTime());
-
             $user = $this->getUser();
             $article->setUtilisateur($user);
+            // 5. On fait un foreach pour la relation avec la table article_categorie
+            foreach($article->getCategories() as $category){
+            	
+            	$category->addArticle($article);
+            	$manager->persist($category);   
+            }
 
             $manager->persist($article);
             $manager->flush();
@@ -107,7 +110,6 @@ class ArticleController extends Controller
         // $repo = $this->getDoctrine()->getRepository(Article::class);
         // 2. Je veux choper l'article en question
         // $article = $repo->find($id);
-
         // 3. Afficher
         return $this->render('article/show.html.twig', [
            'article' => $article
