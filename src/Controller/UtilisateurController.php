@@ -21,7 +21,7 @@ class UtilisateurController extends Controller
         $utilisateurs = $repo->findAll();
 
         return $this->render('utilisateur/index.html.twig', [
-            'controller_name' => 'UtilisateurController', 
+            'controller_name' => 'UtilisateurController',
             'utilisateurs' => $utilisateurs
         ]);
     }
@@ -30,7 +30,7 @@ class UtilisateurController extends Controller
      * @Route("/utilisateur/new", name="utilisateur_new")
      */
     public function createAction(Request $request, ObjectManager $manager) {
-        
+
         // créer un utilisateur
         $utilisateur = new utilisateur();
 
@@ -81,6 +81,33 @@ class UtilisateurController extends Controller
     }
 
     /**
+     * @Route("/utilisateur/edit", name="current_user_edit")
+     */
+    public function editCurrentUser(ObjectManager $manager, Request $request){
+        $utilisateur = $this->getUser();
+        $form = $this->createForm(UtilisateurType::class, $utilisateur);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($utilisateur);
+            $manager->flush();
+
+            return $this->redirectToRoute('utilisateur_show', [
+                'id' => $utilisateur->getId()
+            ]);
+        }
+
+        $formView = $form->createView();
+
+        return $this->render("utilisateur/edit.html.twig", [
+            'form' => $formView
+        ]);
+    }
+
+
+
+    /**
      * @Route("/utilisateur/{id}", name="utilisateur_show")
      */
     public function showAction(Utilisateur $utilisateur){
@@ -89,11 +116,19 @@ class UtilisateurController extends Controller
         ]);
     }
 
+
+    /**
+     * @Route("/utilisateur/profil/", name="profil")
+     */
+    public function showProfil(){
+        return $this->render('utilisateur/profil.html.twig');
+    }
+
     /**
      * @Route("utilisateur/{id}/delete", name="utilisateur_delete")
      */
     public function deleteAction(Utilisateur $utilisateur, ObjectManager $manager) {
-        
+
         $manager->remove($utilisateur);
         $manager->flush();
 

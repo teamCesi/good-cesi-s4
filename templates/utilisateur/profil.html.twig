@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+  <h1 class="text-center">Votre profil</h1>
+  <div class="line-title mb-5"></div>
+  <ul class="list-group">
+  <li class="list-group-item">
+    <h2>Bonjour {{app.user.nom}} {{app.user.prenom}}</h2>
+    <p>Adresse de facturation <br> {{app.user.adresse}}</p>
+    <a href="{{ path('current_user_edit', {'id': app.user.id}) }}">Modifier votre profil</a>
+  </li>
+  </ul>
+</div>
+
+
+{% endblock %}
