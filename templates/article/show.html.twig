@@ -15,17 +15,25 @@
       <p class="badge badge-secondary">Poids : {{ article.poids }} kg</p><br>
       <p class="badge badge-warning">Date de cration : {{ article.dateCreation | date('d/m/Y') }}</p>
       <p>Contacter le vendeur : {{ article.utilisateur.nom | upper }} {{ article.utilisateur.email }}</p>
+      <!-- Si l'article est vendu on affiche juste un champs vendu-->
       {% if article.isVendu == true %}
         <p class="center alert alert-danger">Vendu</p>
       {% else %}
+        <!-- on vérifie que l'utilisateur soit connecté-->
+        {% if app.user  %}
+        <!-- On vérifie si le produit consulté a été posté par l'utilisateur connecté on cache le bouton acheter sinon on l'affiche-->
+        {% if app.user.id != article.utilisateur.id  %}
         <a href="{{ path('article_acheter', {'id': article.id}) }}" class="btn btn-primary view-article">Acheter l'article</a>
+        {% endif %}
+
+        <!-- on vérifie que l'id de l'utilisateur connecté soit le même que le vendeur-->
+        {% if article.utilisateur.id == app.user.id %}
+        <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary view-article">Éditer l'article</a>
+        <a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-primary view-article">Supprimer</a>
+        {% endif %}
+      {% endif %}
       {% endif %}
 
-      <!-- on vérifie que l'id de l'utilisateur connecté soit le même que le vendeur-->
-      {% if article.utilisateur.id == app.user.id %}
-      <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary view-article">Éditer l'article</a>
-      <a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-primary view-article">Supprimer</a>
-      {% endif %}
 
     </div>
   </div>
