@@ -24,7 +24,7 @@
             {% endif %}
           </div>
         </div>
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {% if app.user %}
           <a href="{{ path('profil') }}" class="nav-item nav-link">Mon compte</a>
           <a href="{{ path('logout') }}" class="nav-item nav-link">Déconnexion</a>
         {% else %}
