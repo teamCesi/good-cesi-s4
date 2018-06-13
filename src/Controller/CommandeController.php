@@ -50,4 +50,22 @@ class CommandeController extends Controller
 
         return $this->redirectToRoute('commande_list');
     }
+
+    /**
+     * @Route("/commande/utilisateur", name="commande_user")
+     */
+    public function commandesUserAction() {
+
+        $utilisateur = $this->getUser();
+        
+        // SELECT * FROM commande WHERE utilisateur_id
+        $commandes = $this->getDoctrine()
+            ->getRepository(Commande::class)
+            ->findByUtilisateur($utilisateur);
+
+        return $this->render('commande/commandes.html.twig',[
+            'commandes' => $commandes
+        ]);
+
+    }
 }
