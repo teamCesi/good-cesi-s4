@@ -94,3 +94,8 @@ p.vendu {
 a.create {
   margin-bottom: 10px;
 }
+
+button.expedie {
+  display: block;
+  margin: 10px 0;
+}

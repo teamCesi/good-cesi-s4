@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\Common\Persistence\ObjectManager;
 
 use App\Entity\Commande;
 use App\Repository\CommandeRepository;
+use Symfony\Component\HttpFoundation\Request;
 
 class CommandeController extends Controller
 {
@@ -23,5 +25,25 @@ class CommandeController extends Controller
             'controller_name' => 'CommandeController',
             'commandes' => $commandes
         ]);
+    }
+
+     /**
+     * @Route("/commande/{id}/expedier", name="commande_expedier")
+     */
+    public function expedierAction(Request $request, Commande $commande, ObjectManager $manager) {
+        $statut = $request->request->get("expedie");
+        if($statut == "expedie") {
+            $statut = true;
+        } else {
+            $statut = false;
+        }
+
+        $commande->setIsEnvoyer($statut);
+
+        $manager->persist($commande);
+
+        $manager->flush();
+
+        return $this->redirectToRoute('commande_list');
     }
 }

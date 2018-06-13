@@ -15,9 +15,14 @@
                     <p>Acheté par <strong>{{ commande.utilisateur.prenom }} {{ commande.utilisateur.nom }}</strong></p>
                     <p>Nom de l'article : <strong>{{ commande.article.nom }}</strong></p>
                     <p>Date d'expédition : {{ commande.dateExp | date('d/m/Y') }}</p>
-                    {% if commande.isEnvoyer == true %}
+                    <form action="{{ path('commande_expedier', {'id': commande.id }) }}" method="post">
+                        <input type="radio" name="expedie" value="expedie" {% if commande.isEnvoyer %} checked {% endif %}> Expédié
+                        <input type="radio" name="expedie" value="non-expedie" {% if not commande.isEnvoyer %} checked {% endif %}> Pas expédié
+                        {% if not commande.isEnvoyer %}<button type="submit" class="expedie btn btn-primary">Changer</button>{% endif %}
+                    </form>
+                    {% if commande.isEnvoyer %}
                         <p class="vendu alert alert-info">Expédié</p>
-                     {% endif %}
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>
