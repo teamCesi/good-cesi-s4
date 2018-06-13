@@ -7,16 +7,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Article;
-use App\Repository\ArticleRepository;
 use App\Form\ArticleType;
-<<<<<<< HEAD
-=======
-
 use App\Form\AcheterType;
 use App\Entity\Utilisateur;
+use App\Repository\ArticleRepository;
 use App\Repository\UtilisateurRepository;
 
->>>>>>> 6544a09af2237e892c1dc5097a4395526fa25ca5
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class ArticleController extends Controller
@@ -64,18 +60,16 @@ class ArticleController extends Controller
             // 4. Intégrer l'article à la base avec le manager
             $article->setDateCreation(new \DateTime());
             $user = $this->getUser();
-<<<<<<< HEAD
-            $article->setUtilisateur($user);
+
+            $article->setUtilisateur($user)
+            		->setIsVendu(false);;
             // 5. On fait un foreach pour la relation avec la table article_categorie
             foreach($article->getCategories() as $category){
             	
             	$category->addArticle($article);
             	$manager->persist($category);   
             }
-=======
-            $article->setUtilisateur($user)
-                    ->SetIsVendu(false);
->>>>>>> 6544a09af2237e892c1dc5097a4395526fa25ca5
+
 
             $manager->persist($article);
             $manager->flush();
