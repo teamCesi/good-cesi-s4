@@ -20,8 +20,6 @@ class UtilisateurController extends Controller
 
         $utilisateurs = $repo->findAll();
 
-        dump($utilisateurs);
-
         return $this->render('utilisateur/index.html.twig', [
             'controller_name' => 'UtilisateurController', 
             'utilisateurs' => $utilisateurs

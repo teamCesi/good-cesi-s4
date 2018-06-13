@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use App\Repository\UtilisateurRepository;
+use App\Entity\Utilisateur;
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
 
@@ -23,7 +24,7 @@ class HomeController extends Controller
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'articles' => $articles
+            'articles' => $articles,
         ]);
     }
 
