@@ -140,9 +140,12 @@ class ArticleController extends Controller
      * @IsGranted("ROLE_USER")
     */
 
-    public function acheterAction(Utilisateur $utilisateur, Article $article, ObjectManager $manager, Request $request) {
+    public function acheterAction(Article $article, ObjectManager $manager, Request $request) {
+
+        // récupère l'utilisateur
+        $utilisateur = $this->getUser();
         
-        // 1. Modif adresse client en base
+        // 1. Modif adresse client en bas
 
         $form = $this->createForm(AcheterType::class, $utilisateur);
 
@@ -163,7 +166,7 @@ class ArticleController extends Controller
                 // 3. Supprimer l'article acheté
                 //$manager->remove($article);
                 // 3. Modifier le bolean isVendu à true
-                $article->SetIsVendu(true);
+                $article->setIsVendu(true);
 
                 // envoie dans la base : adresse utilisateur + delete article
                 $manager->flush();
