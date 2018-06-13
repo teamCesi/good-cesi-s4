@@ -9,9 +9,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UtilisateurController extends Controller
 {
+
+
     /**
      * @Route("/utilisateur", name="utilisateur_list")
      */
@@ -29,24 +32,27 @@ class UtilisateurController extends Controller
     /**
      * @Route("/utilisateur/new", name="utilisateur_new")
      */
-    public function createAction(Request $request, ObjectManager $manager) {
+    public function createAction(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder) {
 
         // créer un utilisateur
         $utilisateur = new utilisateur();
-
         // besoin du formulaire UtilisateurType
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
-
         // On doit analyser la requête HTTP
         $form->handleRequest($request);
-
+        // On vérifie que les données envoyées sont valide
         if($form->isSubmitted() && $form->isValid()){
-            // itégrer utilisateur à la bdd avec manager
-            $utilisateur->setIsAdmin(0);
+            // On récupère le mot de passe et on le crypte.
+            $password = $utilisateur->getPassword();
+            $password = $encoder->encodePassword($utilisateur, $password);
+            // On définit par défault le niveau d'admin et le mot de passe crypter.
+            $utilisateur->setIsAdmin(0)
+                        ->setPassword($password);
+            // intégrer utilisateur à la bdd avec manager
             $manager->persist($utilisateur);
             $manager->flush();
-
-            return $this->redirectToRoute('utilisateur_list');
+            // On redigire vers la page d'acceuil
+            return $this->redirectToRoute('login');
         }
 
         $formView = $form->createView();
