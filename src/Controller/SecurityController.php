@@ -17,9 +17,9 @@ class SecurityController extends Controller
         
         // $formView = $form->createView();
            
-        return $this->render('security/index.html.twig', [
+            return $this->render('security/index.html.twig', [
             'controller_name' => 'SecurityController',
-            // 'form' => $formView
+            //  'form' => $formView
         ]);
     }
     
