@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  * @UniqueEntity("email", message="Cet email est déjà utilisé, choisissez en un autre")
+ * @UniqueEntity("username", message="Cet identifiant est déjà utilisé, choisissez en un autre")
  */
 class Utilisateur implements UserInterface, \Serializable
 {
@@ -44,7 +45,7 @@ class Utilisateur implements UserInterface, \Serializable
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=200, unique=true)
      */
     private $username;
 
