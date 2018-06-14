@@ -116,3 +116,9 @@ button.expedie {
   display: flex;
   justify-content: space-between;
 }
+
+/* profil*/
+.modif-profil{
+  float: right;
+}
+

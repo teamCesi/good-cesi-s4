@@ -14,7 +14,9 @@
       <p class="badge badge-secondary">Frais de port : {{ article.fraisDePort }} €</p><br>
       <p class="badge badge-secondary">Poids : {{ article.poids }} kg</p><br>
       <p class="badge badge-warning">Date de cration : {{ article.dateCreation | date('d/m/Y') }}</p>
+      {% if app.user %}
       <p>Contacter le vendeur : {{ article.utilisateur.nom | upper }} {{ article.utilisateur.email }}</p>
+      {% endif %}
       <!-- Si l'article est vendu on affiche juste un champs vendu-->
       {% if article.isVendu == true %}
         <p class="center alert alert-danger">Vendu</p>

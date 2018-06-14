@@ -8,9 +8,11 @@
     <div class="line-title mb-5"></div>
 
     <div class="container">
-      <a href="{{ path('article_new') }}"class="btn btn-primary create">Crér un article</a>
+      {% if app.user %}
+        <a href="{{ path('article_new') }}"class="btn btn-primary create">Vendre un article</a>
+      {% endif %}
       <ul class="list-group">
-        {% for article in articles %}
+        {% for article in articles|sort|reverse %}
           <li class="list-group-item">
             <h2>{{ article.nom }}</h2>
             <span class="badge badge-warning">Créé le {{ article.dateCreation | date('d/m/Y') }}</span><br>

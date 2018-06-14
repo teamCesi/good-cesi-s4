@@ -18,6 +18,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class ArticleController extends Controller
 {
+   
     /**
      * @Route("/article", name="article_list")
      */

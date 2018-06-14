@@ -9,20 +9,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-
-
-
 class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('nom')
-            ->add('prix')
+            ->add('prix', null, array('label' => 'Prix (€)'))
             ->add('description')
             ->add('image')
-            ->add('poids')
-            ->add('fraisDePort')
+            ->add('poids', null, array('label' => 'Poids (Kg)'))
+            ->add('fraisDePort', null, array('label' => 'Frais de port (€)'))
             ->add('categories', EntityType::class, array(
                 'class' => Categorie::class,
                 'multiple' => true,
