@@ -14,6 +14,11 @@
   </ul>
   <a href="{{ path('article_new') }}"class="btn btn-primary view-article commande create ">Crér un article</a>
   <a href="{{ path('commande_user') }}" class="btn btn-primary view-article commande">Mes commandes</a>
+
+  {% if is_granted("ROLE_ADMIN") == true %}
+    <a href="{{ path('commande_list') }}" class="btn btn-primary view-article commande">liste des commandes</a>
+  {% endif %}
+
 </div>
 
 
