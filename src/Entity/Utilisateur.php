@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
@@ -35,7 +36,8 @@ class Utilisateur implements UserInterface, \Serializable
     private $adresse;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
+ * @ORM\Column(name="email", type="string", length=255, unique=true)
      */
     private $email;
 
@@ -189,7 +191,7 @@ class Utilisateur implements UserInterface, \Serializable
 
         return $this;
     }
-    
+
     public function getSalt()
     {
         // you *may* need a real salt depending on your encoder
@@ -202,7 +204,7 @@ class Utilisateur implements UserInterface, \Serializable
         if($this->isAdmin == true) {
             return ['ROLE_USER', 'ROLE_ADMIN'];
         }
-        
+
         return array('ROLE_USER');
     }
 
