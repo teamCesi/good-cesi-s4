@@ -7,19 +7,25 @@
   <ul class="list-group">
     <li class="list-group-item">
       <h2>Bonjour {{app.user.nom}} {{app.user.prenom}}</h2>
-      <p><span class="badge badge-info">Adresse de facturation</span>
+      <p>
+        <span class="badge badge-info">Adresse de facturation</span>
         <br> {{app.user.adresse}}</p>
-        <a href="{{ path('article_new') }}"class="btn btn-success view-article commande create ">Créer un article</a>
-        <a href="{{ path('commande_user') }}" class="btn btn-primary view-article commande">Mes commandes</a>
+      <a href="{{ path('article_vente') }}" class="btn btn-success view-article commande create ">Vendre un article</a>
 
-        {% if is_granted("ROLE_ADMIN") == true %}
+      <div class="content-article">
+        <a href="{{ path('commande_achat') }}" class="btn btn-primary view-article commande">Mes articles achetés</a>
+        <a href="{{ path('commande_vente') }}" class="btn btn-primary view-article commande">Mes articles vendus</a>
+      </div>
+
+      {% if is_granted("ROLE_ADMIN") == true %}
         <a href="{{ path('commande_list') }}" class="btn btn-primary view-article commande">liste des commandes</a>
-        {% endif %}
-        <a href="{{ path('current_user_edit', {'id': app.user.id}) }}" class="modif-profil ">Modifier votre profil</a>
+      {% endif %}
+      <a href="{{ path('current_user_edit', {'id': app.user.id}) }}" class="modif-profil ">Modifier votre profil</a>
     </li>
   </ul>
-
 </div>
+
+
 
 
 {% endblock %}

@@ -9,7 +9,7 @@
 
     <div class="container">
       {% if app.user %}
-        <a href="{{ path('article_new') }}"class="btn btn-primary create">Vendre un article</a>
+        <a href="{{ path('article_vente') }}"class="btn btn-primary create">Vendre un article</a>
       {% endif %}
       <ul class="list-group">
         {% for article in articles|sort|reverse %}

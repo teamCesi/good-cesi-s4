@@ -101,14 +101,24 @@ button.expedie {
 }
 
 .commande {
-  width: 30%;
+  width: 48%;
 }
 
 .width-center {
   margin: 0 auto;
 }
 
+.vente-title {
+  margin: 20px 0;
+}
+
+.content-article {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* profil*/
 .modif-profil{
   float: right;
 }
+
