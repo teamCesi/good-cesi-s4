@@ -40,7 +40,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/article/new", name="article_new")
+     * @Route("/article/vente", name="article_vente")
      * @IsGranted("ROLE_USER")
      */
     public function createAction(Request $request, ObjectManager $manager) {
