@@ -31,7 +31,7 @@ class ArticleController extends Controller
         $articles = $repo->findAll();
 
         // 3. On débug avec dump()
-        dump($articles);
+        //dump($articles);
 
         return $this->render('article/index.html.twig', [
             'controller_name' => 'ArticleController',
@@ -170,6 +170,7 @@ class ArticleController extends Controller
                 $commande = new Commande();
                 $commande->setUtilisateur($utilisateur)
                          ->setArticle($article)
+                         ->setDateValidation(new \DateTime())
                          ->setIsEnvoyer(false);
                          
                 //$manager->persist($utilisateur);
