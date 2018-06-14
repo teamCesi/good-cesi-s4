@@ -9,9 +9,10 @@
       <h2>Bonjour {{app.user.nom}} {{app.user.prenom}}</h2>
       <p>Adresse de facturation
         <br> {{app.user.adresse}}</p>
-      <a href="{{ path('current_user_edit', {'id': app.user.id}) }}">Modifier votre profil</a>
+        <a href="{{ path('current_user_edit', {'id': app.user.id}) }}">Modifier votre profil</a>
     </li>
   </ul>
+  <a href="{{ path('article_new') }}"class="btn btn-primary view-article commande create ">Crér un article</a>
   <a href="{{ path('commande_user') }}" class="btn btn-primary view-article commande">Mes commandes</a>
 </div>
 
