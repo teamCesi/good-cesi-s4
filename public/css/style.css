@@ -107,3 +107,8 @@ button.expedie {
 .width-center {
   margin: 0 auto;
 }
+
+/* profil*/
+.modif-profil{
+  float: right;
+}
