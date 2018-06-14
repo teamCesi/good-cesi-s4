@@ -122,3 +122,15 @@ button.expedie {
   float: right;
 }
 
+
+/* article*/
+
+.card-img-top{
+float: left;
+width: 50%!important;
+}
+
+.card-body{
+  float: right;
+  width: 50%;
+}
