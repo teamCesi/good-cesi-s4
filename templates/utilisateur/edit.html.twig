@@ -1,17 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier un utilisateur{% endblock %}
+{% block title %}Modifier vos informations{% endblock %}
 
 {% block body %}
 
-    <h1>Modifier un utilisateur</h1>
+    <h1>Modifier vos informations</h1>
 
     {{ form_start(form) }}
 
+    
+
     {{ form_widget(form) }}
 
-    <button type="submit">Modifier un utilisateur</button>
+    <button type="submit">Sauvegarder !</button>
 
-    {{ form_end(form )}}
+    {{ form_end(form, {'render_rest': false}) }}
 
 {% endblock %}
