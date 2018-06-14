@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vente{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center">Mes articles</h1>
+<div class="line-title mb-5"></div>
+
+    <div class="container">
+            <h2 class="text-center vente-title">Mes articles vendues</h2>
+            {% if not articles is empty %}
+                <ul class="list-group">
+                    {% for article in articles if article.commande %}
+                        <li class="list-group-item">
+                            <p>Numéro de commande : <strong>{{ article.commande.id }}</strong></p>
+                            <p>Nom de l'article : <strong>{{ article.nom }}</strong></p>
+                            <p>Date d'expédition : 
+                                {% if article.commande.dateExp %}
+                                    {{ article.commande.dateExp | date('d/m/Y') }}
+                                {% else %}
+                                    Pas encore expédié
+                                {% endif %}
+                            </p>
+                            {% if not article.commande.isEnvoyer %}
+                                <form action="{{ path('commande_expedier', {'id': article.commande.id }) }}" method="post">
+                                        <input type="radio" name="expedie" value="expedie" {% if article.commande.isEnvoyer %} checked {% endif %}> Expédié
+                                        <input type="radio" name="expedie" value="non-expedie" {% if not article.commande.isEnvoyer %} checked {% endif %}> Pas expédié
+                                        <button type="submit" class="expedie btn btn-primary">Changer</button>
+                                </form>
+                            {% endif %}
+                            {% if article.commande.isEnvoyer %}
+                                    <p class="vendu alert alert-info">Expédié</p>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+                <h2 class="text-center vente-title">Mes articles en vente</h2>
+                <ul class="list-group">
+                        {% for article in articles if not article.commande %}
+                            <li class="list-group-item">
+                                <p>Nom de l'article : <strong>{{ article.nom }}</strong></p>
+                                <p>Prix de l'article : <strong>{{ article.prix }}</strong></p>
+                                <p>Poids de l'article : <strong>{{ article.poids }}</strong></p>
+                                <p>Frais de port : <strong>{{ article.fraisDePort }}</strong></p>
+                            </li>
+                        {% endfor %}
+                </ul>
+            {% else %}
+                <p class="center alert alert-danger width-center commande">Pas de commandes</p>
+            {% endif %}
+    </div>
+
+{% endblock %}

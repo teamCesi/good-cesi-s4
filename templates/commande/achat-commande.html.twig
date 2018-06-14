@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Achat{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center">Mes commandes achetées</h1>
+<div class="line-title mb-5"></div>
+
+    <div class="container">
+            {% if not commandes is empty %}
+                <ul class="list-group">
+                    {% for commande in commandes %}
+                        <li class="list-group-item">
+                            <p>Numéro de commande : <strong>{{ commande.id }}</strong></p>
+                            <p>Nom de l'article : <strong>{{ commande.article.nom }}</strong></p>
+                            <p>Date d'expédition : {{ commande.dateExp | date('d/m/Y') }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="center alert alert-danger width-center commande">Pas de commandes</p>
+            {% endif %}
+    </div>
+
+{% endblock %}
