@@ -90,13 +90,36 @@ class ArticleController extends Controller
      * @Route("/article/{id}/edit", name="article_edit")
      * @IsGranted("ROLE_USER")
      */
-    public function editAction(Article $article, ObjectManager $manager, Request $request) {
+    public function editAction($id, ArticleRepository $repo, Article $article, ObjectManager $manager, Request $request) {
 
+        
         $form = $this->createForm(ArticleType::class, $article);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+
+            // Je sélectionne toutes les catégories liées pour l'instant à mon article
+            $query = $manager->createQuery('
+                SELECT c FROM App\Entity\Categorie c 
+                JOIN c.article a  WHERE a.id = :id
+            ')->setParameter('id', $article->getId());
+
+            $categories = $query->execute();
+
+            // Je détache mon article de ces catégories
+            foreach($categories as $categorie) {
+                $categorie->removeArticle($article);
+            }
+
+            // Pour chaque catégorie que j'ai coché dans le formulaire j'attache de nouvea l'article
+            foreach($article->getCategories() as $category){
+                
+                $category->addArticle($article);
+                $manager->persist($category);   
+            }
+
+
             $manager->persist($article);
             $manager->flush();
             return $this->redirectToRoute('article_show', [
