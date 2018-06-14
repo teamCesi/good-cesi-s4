@@ -8,14 +8,16 @@
         <p>{{ utilisateur.adresse }}</p>
         <p>{{ utilisateur.email }}</p>
         <hr>
-        <h2>Voici les {{ utilisateur.articles | length }} articles</h2>
+        <h2>Articles en vente : {{ utilisateur.articles | length }} </h2>
         {% for article in utilisateur.articles %} 
                 <h3>{{ article.nom }}</h3>
                 <img src="{{ article.image }}">
                 <strong>{{ article.prix }}</strong>
                 <p>{{ article.dateCreation | date('d/m/Y') }}</p>
         {% endfor %}
+        {% if is_granted("ROLE_ADMIN") == true %}
         <a href="{{ path('utilisateur_edit', {'id': utilisateur.id}) }}">Modifier l'utilisateur</a>
         <a href="{{ path('utilisateur_delete', {'id': utilisateur.id}) }}">Supprimer</a>
+        {% endif %}
 
 {% endblock %}

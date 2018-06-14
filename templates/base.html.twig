@@ -10,7 +10,7 @@
     </head>
     <body>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">The goodcesi</a>
+        <a class="navbar-brand" href="/">The GoodCesi</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -19,7 +19,7 @@
             <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="/article">Produits</a>
             {% if app.user %}
-            <a class="nav-item nav-link" href="/utilisateur">utilisateurs</a>
+            <a class="nav-item nav-link" href="/utilisateur">Utilisateurs</a>
             {% endif %}
             {% if is_granted("ROLE_ADMIN") == true %}
               <a class="nav-item nav-link" href="/categorie">Categories</a>
@@ -38,7 +38,7 @@
       {% block body %}{% endblock %}
       <footer class="footer mt-5 ">
         <div class="container">
-          <span class="text-muted">Goodcesi 2018.</span>
+          <span class="text-muted"><center>Goodcesi 2018.</center></span>
         </div>
       </footer>
       {% block javascripts %}{% endblock %}
