@@ -7,7 +7,9 @@
   <div class="container">
     <h1 class="text-center">Liste des utilisateurs</h1>
     <div class="line-title"></div>
+    {% if is_granted("ROLE_ADMIN") == true %}
     <a href="{{ path('utilisateur_new') }}" class="btn btn-success mb-2 mt-2">Créer un utilisateur</a>
+    {% endif %}
     <ul class="list-group">
     {% for utilisateur in utilisateurs %}
     <li class="list-group-item">
