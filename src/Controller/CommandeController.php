@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Persistence\ObjectManager;
 
+use App\Entity\Article;
 use App\Entity\Commande;
 use App\Repository\CommandeRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,6 +38,8 @@ class CommandeController extends Controller
         if($statut == "expedie") {
             // alors on passe le statut à true pour envoyer en bdd
             $statut = true;
+            // on envoie en base la date d'aujourd'hui
+            $commande->setDateExp(new \DateTime());
         } else {
             // sinon on passe le statut à false
             $statut = false;
@@ -48,14 +51,15 @@ class CommandeController extends Controller
 
         $manager->flush();
 
-        return $this->redirectToRoute('commande_list');
+        return $this->redirectToRoute('commande_vente');
     }
 
     /**
-     * @Route("/commande/utilisateur", name="commande_user")
+     * @Route("/commande/achat-commande", name="commande_achat")
      */
-    public function commandesUserAction() {
+    public function commandesAchatAction() {
 
+        // récupère l'utilisateur connecté
         $utilisateur = $this->getUser();
         
         // SELECT * FROM commande WHERE utilisateur_id
@@ -63,8 +67,25 @@ class CommandeController extends Controller
             ->getRepository(Commande::class)
             ->findByUtilisateur($utilisateur);
 
-        return $this->render('commande/commandes.html.twig',[
+        return $this->render('commande/achat-commande.html.twig',[
             'commandes' => $commandes
+        ]);
+
+    }
+
+    /**
+     * @route("/commande/vente-commande", name="commande_vente")
+     */
+    public function commandesVenteAction(){
+
+        $utilisateur = $this->getUser();
+
+        $articles = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->findByUtilisateur($utilisateur);
+
+        return $this->render('commande/vente-commande.html.twig',[
+            'articles' => $articles
         ]);
 
     }
