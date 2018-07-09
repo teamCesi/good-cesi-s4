@@ -8,6 +8,7 @@
 <div class="line-title mb-5"></div>
 
 <div class="container">
+    {% if not commandes is empty %}
         <ul class="list-group">
             {% for commande in commandes %}
                 <li class="list-group-item">
@@ -29,7 +30,9 @@
                 </li>
             {% endfor %}
         </ul>
-
+    {% else %}
+        <p class="center alert alert-danger width-center commande">Pas de commandes</p>
+    {% endif %}
 </div>
 
 
