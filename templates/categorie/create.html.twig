@@ -2,16 +2,16 @@
 
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-{% block title %}Créer une Categorie{% endblock %}
+{% block title %}Créer une Catégorie{% endblock %}
 
 {% block body %}
 
     <div class="container form">
-    <h1>Créer une nouvelle categorie</h1>
-    <div class="line-title"></div>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit" class="btn btn-success mt-4">Créer la categorie !</button>
-    {{ form_end(form) }}
+        <h1 class="text-center">Créer une nouvelle catégorie</h1>
+        <div class="line-title"></div>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-success mt-4">Créer la catégorie !</button>
+        {{ form_end(form) }}
     </div>
 {% endblock %}
