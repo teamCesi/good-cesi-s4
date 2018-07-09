@@ -64,7 +64,7 @@ class AppFixtures extends Fixture
              //   }
 
                     $categorie = new Categorie();
-                    $categorie->setNom("categorie $i")
+                    $categorie->setNom("catégorie $i")
                                 ->addArticle($article);
                     $manager->persist($categorie);
                                 

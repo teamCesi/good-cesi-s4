@@ -86,7 +86,7 @@ input#cb {
     height: 40px;
 }
 
-p.vendu {
+p. {
   width: 15%;
   text-align: center;
 }
@@ -133,4 +133,11 @@ width: 50%!important;
 .card-body{
   float: right;
   width: 50%;
+}
+
+
+/* categorie */
+#content-create {
+  width: 58%;
+  margin: 0 auto 10px;
 }
