@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class UtilisateurController extends Controller
 {
@@ -17,6 +18,7 @@ class UtilisateurController extends Controller
 
     /**
      * @Route("/utilisateur", name="utilisateur_list")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function indexAction(UtilisateurRepository $repo)
     {
