@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\UtilisateurRepository;
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
+use App\Form\UtilisateurEditType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -91,7 +92,7 @@ class UtilisateurController extends Controller
      */
     public function editCurrentUser(ObjectManager $manager, Request $request){
         $utilisateur = $this->getUser();
-        $form = $this->createForm(UtilisateurType::class, $utilisateur);
+        $form = $this->createForm(UtilisateurEditType::class, $utilisateur);
 
         $form->handleRequest($request);
 
