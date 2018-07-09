@@ -6,10 +6,9 @@
 
 <h1 class="text-center">Mes articles</h1>
 <div class="line-title mb-5"></div>
-
+{% if not articles is empty %}
     <div class="container">
-            <h2 class="text-center vente-title">Mes articles vendues</h2>
-            {% if not articles is empty %}
+            <h2 class="text-center vente-title">Mes articles vendus</h2>
                 <ul class="list-group">
                     {% for article in articles if article.commande %}
                         <li class="list-group-item">
@@ -37,6 +36,7 @@
                             {% endif %}
                         </li>
                     {% endfor %}
+                    
                 </ul>
                 <h2 class="text-center vente-title">Mes articles en vente</h2>
                 <ul class="list-group">
@@ -49,9 +49,9 @@
                             </li>
                         {% endfor %}
                 </ul>
-            {% else %}
-                <p class="center alert alert-danger width-center commande">Pas de commandes</p>
-            {% endif %}
+            
     </div>
-
+    {% else %}
+        <p class="center alert alert-danger width-center commande">Pas d'articles</p>
+    {% endif %}
 {% endblock %}

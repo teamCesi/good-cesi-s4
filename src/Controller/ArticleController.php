@@ -58,7 +58,7 @@ class ArticleController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-        	dump($article);
+        	//dump($article);
             // 4. Intégrer l'article à la base avec le manager
             $article->setDateCreation(new \DateTime());
             $user = $this->getUser();
