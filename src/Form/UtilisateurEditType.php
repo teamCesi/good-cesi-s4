@@ -17,7 +17,6 @@ class UtilisateurEditType extends AbstractType
             ->add('adresse')
             ->add('email')
             ->add('username')
-            ->add('isAdmin')
         ;
     }
 
