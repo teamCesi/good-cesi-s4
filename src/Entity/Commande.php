@@ -22,6 +22,11 @@ class Commande
     private $dateExp;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateValidation;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $isEnvoyer;
@@ -89,6 +94,18 @@ class Commande
     public function setUtilisateur(?Utilisateur $utilisateur): self
     {
         $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    public function getDateValidation(): ?\DateTimeInterface
+    {
+        return $this->dateValidation;
+    }
+
+    public function setDateValidation(?\DateTimeInterface $dateValidation): self
+    {
+        $this->dateValidation = $dateValidation;
 
         return $this;
     }
