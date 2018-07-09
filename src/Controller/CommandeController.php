@@ -10,11 +10,13 @@ use App\Entity\Article;
 use App\Entity\Commande;
 use App\Repository\CommandeRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class CommandeController extends Controller
 {
     /**
      * @Route("/commande", name="commande_list")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function indexAction(CommandeRepository $repo)
     {

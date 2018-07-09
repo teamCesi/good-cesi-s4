@@ -31,7 +31,9 @@
                                 </form>
                             {% endif %}
                             {% if article.commande.isEnvoyer %}
-                                    <p class="vendu alert alert-info">Expédié</p>
+                                <p class="vendu alert alert-info">Expédié</p>
+                            {% else %}
+                                <p class="vendu alert alert-warning">Validé</p> 
                             {% endif %}
                         </li>
                     {% endfor %}

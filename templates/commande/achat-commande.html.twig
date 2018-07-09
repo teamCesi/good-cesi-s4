@@ -14,7 +14,18 @@
                         <li class="list-group-item">
                             <p>Numéro de commande : <strong>{{ commande.id }}</strong></p>
                             <p>Nom de l'article : <strong>{{ commande.article.nom }}</strong></p>
-                            <p>Date d'expédition : {{ commande.dateExp | date('d/m/Y') }}</p>
+                            <p>Date d'expédition : 
+                                {% if commande.dateExp %}
+                                    {{ commande.dateExp | date('d/m/Y') }}
+                                {% else %}
+                                    Pas encore expédié
+                                {% endif %}
+                            </p>
+                            {% if commande.isEnvoyer %}
+                                <p class="vendu alert alert-info">Expédié</p>
+                            {% else %}
+                                <p class="vendu alert alert-warning">Validé</p>   
+                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>
