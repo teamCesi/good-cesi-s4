@@ -101,10 +101,7 @@ class UtilisateurController extends Controller
         if($form->isSubmitted() && $form->isValid()){
             $manager->persist($utilisateur);
             $manager->flush();
-
-            return $this->redirectToRoute('utilisateur_show', [
-                'id' => $utilisateur->getId()
-            ]);
+            return $this->render('utilisateur/profil.html.twig');
         }
 
         $formView = $form->createView();
