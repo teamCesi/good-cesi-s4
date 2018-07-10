@@ -13,8 +13,8 @@
       <a href="{{ path('article_vente') }}" class="btn btn-success view-article commande create ">Vendre un article</a>
 
       <div class="content-article">
-        <a href="{{ path('commande_achat') }}" class="btn btn-primary view-article commande">Mes articles achetés</a>
-        <a href="{{ path('commande_vente') }}" class="btn btn-primary view-article commande">Mes articles vendus</a>
+        <a href="{{ path('commande_achat') }}" class="btn btn-primary view-article commande">Mes achats</a>
+        <a href="{{ path('commande_vente') }}" class="btn btn-primary view-article commande">Mes ventes</a>
       </div>
 
       {% if is_granted("ROLE_ADMIN") == true %}

@@ -4,22 +4,30 @@
 
 {% block body %}
 
-        <div class="center">
-                <h1>{{ utilisateur.nom }} {{ utilisateur.prenom | upper }}</h1>
-                <p>Adresse : {{ utilisateur.adresse }}</p>
-                <p>Email : {{ utilisateur.email }}</p>
-                <hr>
+
+        <div class="container">
+          <h1 class="text-center">profil de {{ utilisateur.nom }} {{ utilisateur.prenom | upper }} </h1>
+          <div class="line-title mb-5"></div>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <h2>Profil de  {{ utilisateur.nom }} {{ utilisateur.prenom | upper }}</h2>
+              <p>
+                <span class="badge badge-info">Adresse de facturation</span>
+                <br> {{ utilisateur.adresse }}</p>
                 <h2>Articles en vente : {{ utilisateur.articles | length }} </h2>
-                {% for article in utilisateur.articles %} 
+                {% for article in utilisateur.articles %}
                         <h3>Nom de l'article : {{ article.nom }}</h3>
                         <img src="{{ article.image }}">
                         <p>Prix : {{ article.prix }}</p>
                         <p>Date de création : {{ article.dateCreation | date('d/m/Y') }}</p>
                 {% endfor %}
                 {% if is_granted("ROLE_ADMIN") == true %}
-                <a href="{{ path('utilisateur_edit', {'id': utilisateur.id}) }}">Modifier l'utilisateur</a>
-                <a href="{{ path('utilisateur_delete', {'id': utilisateur.id}) }}">Supprimer</a>
+                <a href="{{ path('utilisateur_edit', {'id': utilisateur.id}) }}" class="btn btn-primary view-article commande">Modifier l'utilisateur</a>
+                <a href="{{ path('utilisateur_delete', {'id': utilisateur.id}) }}" class="btn btn-primary view-article commande">Supprimer</a>
                 {% endif %}
+            </li>
+          </ul>
         </div>
+
 
 {% endblock %}
